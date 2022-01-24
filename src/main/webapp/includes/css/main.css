@@ -1,0 +1,262 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* Global */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --mauve: #5716ab;
+    --dark: #2d2c2c;
+    --lightmauve: rgba(180, 139, 235, 0.4);
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    font-family: 'Poppins', 'Open Sans', sans-serif;
+    font-size: 1.6rem;
+    color: var(--dark);
+    max-width: 120rem;
+    margin: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    height: 100%;
+    margin: 2rem 4rem;
+}
+
+.btn {
+    border-radius: .5rem;
+    font-weight: 500;
+    font-size: 2.5rem;
+}
+
+.btn-transparent {
+    color: var(--mauve);
+    border: 2.5px solid var(--mauve);
+}
+
+.btn-mauve {
+    color: white;
+    background-color: var(--mauve);
+}
+
+/* Intro Section */
+.intro {
+    width: 100%;
+}
+
+.intro .container {
+    background-color: var(--lightmauve);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 60vh;
+    border-radius: 2rem;
+}
+
+.intro-text {
+    flex: 1 0 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.intro-text h1 {
+    color: var(--mauve);
+    font-size: 4rem;
+    text-align: center;
+    padding: 5rem;
+    transform: translateY(-10%);
+}
+
+.intro-btn {
+    transform: translateY(-100%);
+}
+
+.intro-text .btn-transparent {
+    margin-right: .5rem;
+    padding: .5rem 2rem;
+}
+
+.intro-text .btn-mauve {
+    margin-left: .5rem;
+    padding: .75rem 5rem;
+}
+
+.intro-pics {
+    flex: 1 0 35%;
+    position: relative;
+    width: 100%;
+    height: 80%;
+    display: flex;
+}
+
+.intro-pic {
+    width: fit-content;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 1rem;
+    box-shadow: rgba(10, 10, 10, 0.25) 0px 48px 100px 0px;
+}
+
+.intro-pic:first-child {
+    transform: translateY(-5%);
+}
+
+.intro-pic:nth-child(2) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translate(65%, 5%);
+}
+
+/* Add Album */
+.add-album .container {
+    display: flex;
+}
+
+.form-image {
+    flex: 1 0 45%;
+    position: relative;
+}
+
+.form-image::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--lightmauve);
+}
+
+.form-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.new-album-form {
+    flex: 1 0 50%;
+    background-color: var(--lightmauve);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.album {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--mauve);
+}
+
+.album p {
+    margin-left: 1rem;
+}
+
+.fa-image, .fa-file-image {
+    color: var(--mauve);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.form-input input {
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid black;
+    outline: none;
+    transition: border-bottom .5s;
+}
+
+.form-input input:focus {
+    border-bottom: 3px solid var(--mauve);
+}
+
+.file-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.fa-user-friends {
+    color: var(--mauve);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.form-select select {
+    background: transparent;
+    transition: outline .5s;
+}
+
+.form-select .fa-images {
+    color: var(--mauve);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.form-select select:focus {
+    outline: 1px solid var(--mauve);
+}
+
+.submit-btn {
+    font-size: 1.75rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: var(--mauve);
+    color: white;
+    box-shadow: rgb(10 10 10 / 25%) 0px 6px 12.5px 0px;
+    transition: all .5s;
+}
+
+.submit-btn:hover {
+    background-color: rgb(110, 63, 172);
+}
+
+.submit-btn:active {
+    transform: translate(-2%, -4%);
+    box-shadow: none;
+}
+
+.result .success {
+    background-color: rgb(146, 243, 146);
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(0, 77, 0);
+    box-shadow: rgb(10 10 10 / 25%) 0px 24px 50px 0px;
+}
+
+.result .error {
+    background-color: rgb(243, 146, 146);
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(77, 0, 0);
+    box-shadow: rgb(10 10 10 / 25%) 0px 24px 50px 0px;
+}
