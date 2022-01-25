@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +16,9 @@ public class UserDAO {
 			String query = "SELECT * FROM Users WHERE userId = ?";
 			Object[] values = new Object[1];
 			values[0] = id;
-			ResultSet resultSet = Database.queryDB(query, values);
+			
+			Connection conn = Database.newConnection();
+			ResultSet resultSet = Database.queryDB(conn, query, values);
 			
 			User user = new User(
 					resultSet.getInt("userId"),
@@ -32,6 +35,8 @@ public class UserDAO {
 			
 			if (email != null && !email.isEmpty()) user.setEmail(email);
 			
+			conn.close();
+			
 			return user;
 			
 		} catch(SQLException ex) {
@@ -46,7 +51,9 @@ public class UserDAO {
 			String query = "SELECT * FROM Users WHERE username = ?";
 			Object[] values = new Object[1];
 			values[0] = username;
-			ResultSet resultSet = Database.queryDB(query, values);
+			
+			Connection conn = Database.newConnection();
+			ResultSet resultSet = Database.queryDB(conn, query, values);
 			
 			User user = new User(
 					resultSet.getInt("userId"),
@@ -63,6 +70,8 @@ public class UserDAO {
 			
 			if (!email.isEmpty()) user.setEmail(email);
 			
+			conn.close();
+			
 			return user;
 			
 		} catch(SQLException ex) {
@@ -74,52 +83,92 @@ public class UserDAO {
 	public static boolean add(User user) {
 		if (user == null) return false;
 		
-		String query = "INSERT INTO Users(username, passwd, nom, prenom, email, is_admin) VALUES (?, ?, ?, ?, ?, ?)";
-		
-		Object[] values = new Object[6];
-		values[0] = user.getUsername();
-		values[1] = user.getPassword();
-		values[2] = user.getName();
-		values[3] = user.getSurname();
-		values[4] = user.getEmail();
-		values[5] = user.isAdmin();
-		
-		return Database.updateDB(query, values);
+		try {
+
+			Connection conn = Database.newConnection();
+	
+			String query = "INSERT INTO Users(username, passwd, nom, prenom, email, is_admin) VALUES (?, ?, ?, ?, ?, ?)";
+			
+			Object[] values = new Object[6];
+			values[0] = user.getUsername();
+			values[1] = user.getPassword();
+			values[2] = user.getName();
+			values[3] = user.getSurname();
+			values[4] = user.getEmail();
+			values[5] = user.isAdmin();
+
+			boolean update = Database.updateDB(conn, query, values);
+	
+			conn.close();
+			
+			return update;
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			return false;
+		}
 	}
 	
 	public static boolean update(User user) {
 		if (user == null) return false;
-		
-		String query = "UPDATE Users SET username = ?, passwd = ?, nom = ?, prenom = ?, email = ?, is_admin = ? WHERE userId = ?";
-		
-		Object[] values = new Object[7];
-		values[0] = user.getUsername();
-		values[1] = user.getPassword();
-		values[2] = user.getName();
-		values[3] = user.getSurname();
-		values[4] = user.getEmail();
-		values[5] = user.isAdmin();
-		values[6] = user.getId();
-		
-		return Database.updateDB(query, values);
+		try {
+			
+			Connection conn =Database.newConnection();
+	
+			String query = "UPDATE Users SET username = ?, passwd = ?, nom = ?, prenom = ?, email = ?, is_admin = ? WHERE userId = ?";
+			
+			Object[] values = new Object[7];
+			values[0] = user.getUsername();
+			values[1] = user.getPassword();
+			values[2] = user.getName();
+			values[3] = user.getSurname();
+			values[4] = user.getEmail();
+			values[5] = user.isAdmin();
+			values[6] = user.getId();
+	
+			boolean update = Database.updateDB(conn, query, values);
+	
+			conn.close();
+			
+			return update;
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			return false;
+		}
 	}
 	
 	public static boolean delete(User user) {
 		if (user == null) return false;
 		
-		String query = "DELETE FROM Users WHERE userId = ?";
-		
-		Object[] values = new Object[1];
-		values[0] = user.getId();
-		
-		return Database.updateDB(query, values);
+		try {
+			
+			Connection conn =Database.newConnection();
+	
+			String query = "DELETE FROM Users WHERE userId = ?";
+			
+			Object[] values = new Object[1];
+			values[0] = user.getId();
+	
+			boolean update = Database.updateDB(conn, query, values);
+	
+			conn.close();
+			
+			return update;
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			return false;
+		}
 	}
 	
 	public static ArrayList<User> listUsers() {
 		try {
 			
 			String query = "SELECT * FROM Users";
-			ResultSet resultSet = Database.queryDB(query);
+			
+			Connection conn = Database.newConnection();
+			ResultSet resultSet = Database.queryDB(conn, query);
 
             ArrayList<User> users = new ArrayList<User>();
             User user = null;

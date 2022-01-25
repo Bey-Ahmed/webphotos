@@ -51,7 +51,7 @@
         <section class="result">
             <div class="container">
             	<p class="success">${file}</p>
-                <p class="success">${(success == 1) ? "Nouvel album créé!" : ""}</p>
+                <p class="success">${(success == 1) ? "Nouvelle photo ajoutée!" : ""}</p>
                 <p class="error">${(success == 0) ? "Erreur!" : ""}</p>
             </div>
         </section>

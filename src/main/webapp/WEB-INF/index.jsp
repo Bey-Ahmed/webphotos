@@ -26,6 +26,18 @@
                 </div>
             </div>
         </section>
+
+        <section class="photos">
+            <div class="container">
+                <div class="grid photos-grid">
+                    <c:forEach items="${photos}" var="photo">
+                        <div class="grid-item featured-photo">
+                            <img src="${ photo.filepath }" alt="">
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 </html>

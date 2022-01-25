@@ -10,8 +10,8 @@ import java.sql.Statement;
 public class Database {
 
 	public static Connection newConnection() {
-		Connection conn = null;
 		
+		Connection conn = null;
 		String url = "jdbc:mysql://localhost/webphotos";
 		String username = "root";
 		String password = "";
@@ -36,19 +36,15 @@ public class Database {
 		return conn;
 	}
 	
-	public static ResultSet queryDB(String query) {
-		Connection conn = null;
+	public static ResultSet queryDB(Connection conn, String query) {
 		Statement statement = null;
 		ResultSet resultSet = null;
 		
 		try {
 			
-			conn = Database.newConnection();
 			statement = conn.createStatement();
 			
 			resultSet = statement.executeQuery(query);
-			
-			conn.close();
 			
 			return resultSet;
 			
@@ -58,14 +54,12 @@ public class Database {
 		}
 	}
 
-	public static ResultSet queryDB(String query, Object[] values) {
-		Connection conn = null;
+	public static ResultSet queryDB(Connection conn, String query, Object[] values) {
 		PreparedStatement pStatement = null;
 		ResultSet resultSet = null;
 		
 		try {
 			
-			conn = Database.newConnection();
 			pStatement = conn.prepareStatement(query);
 			
 			if ((values != null) && (values.length != 0)) {
@@ -77,8 +71,6 @@ public class Database {
 			
 			resultSet = pStatement.executeQuery();
 			
-			conn.close();
-			
 			return resultSet;
 			
 		} catch(SQLException ex) {
@@ -87,14 +79,12 @@ public class Database {
 		}
 	}
 	
-	public static boolean updateDB(String query, Object[] values) {
-		Connection conn = null;
+	public static boolean updateDB(Connection conn, String query, Object[] values) {
 		PreparedStatement pStatement = null;
 		int success = 0;
 		
 		try {
 			
-			conn = Database.newConnection();
 			pStatement = conn.prepareStatement(query);
 			
 			if ((values != null) && (values.length != 0)) {
@@ -105,8 +95,6 @@ public class Database {
 			}
 			
 			success = pStatement.executeUpdate();
-			
-			conn.close();
 			
 			return (success > 0 ? true:false);
 			
